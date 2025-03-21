@@ -11,13 +11,6 @@ with open('User Data/TopArtists.txt') as file:
     top_artists_contents = file.read()
 #print(top_artists_contents)
 
-prompt1 = f'What does this say about me if these are my top artists: {top_artists_contents}'                     
-
-num_artists_recomended = 100
-prompt2 = f'Can you recomend me {num_artists_recomended} more artists that I might like based on: {top_artists_contents}'
-
-prompt3 = f'Can you guess my gender, age, and what region im from based on my top artist{top_artists_contents}'
-
 def open_ai_api_req(promp):
     response = openai.ChatCompletion.create(
     model="gpt-4o",
@@ -28,6 +21,15 @@ def open_ai_api_req(promp):
     )
     return response
 
+# Prompts
+prompt1 = f'What does this say about me if these are my top artists: {top_artists_contents}'                     
+
+num_artists_recomended = 100
+prompt2 = f'Can you recomend me {num_artists_recomended} more artists that I might like based on: {top_artists_contents}'
+
+prompt3 = f'Can you guess my gender, age, and what region im from based on my top artist{top_artists_contents}'
+
+# Call API based on prompts
 print('What your top artists say about you: \n\n')
 completion_0 = open_ai_api_req(prompt1)
 print(completion_0.choices[0].message.content + '\n')

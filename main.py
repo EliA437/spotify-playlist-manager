@@ -1,5 +1,6 @@
 from fetch_data import get_playlist_info, get_users_top_artists, get_users_top_tracks, save_playlist_names_to_txt
 
+# eventually add main terminal logic here for interacting with the program
 
 if __name__ == "__main__":
     
