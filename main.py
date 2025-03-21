@@ -7,7 +7,7 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 redirect_uri = 'http://localhost:5000/callback'
-scope = 'playlist-read-private'  # Access private playlists
+scope = 'playlist-read-private, user-top-read'  # Access private playlists, and users top artists
 
 # Authenticate with Spotify (this will open a browser for login)
 sp_oauth = SpotifyOAuth(
@@ -24,6 +24,9 @@ sp = spotipy.Spotify(auth_manager=sp_oauth)
 
 # Get playlist info
 def get_playlist_info():
+
+    print("Fetching your Spotify playlist data...\n")
+
     playlists = sp.current_user_playlists()
     playlists_info = []
     
@@ -41,6 +44,9 @@ def get_playlist_info():
 
 # Write playlist names and url to text file
 def save_playlist_names_to_txt(playlists_info, folder="Playlist Data", filename="PlaylistNames.txt"):
+
+    print(f"Writing playlist names...")
+
     file_path = os.path.join(folder, filename)
     with open(file_path, "w") as file:  # open in write mode
         for name, url, _ in playlists_info:  # Unpack name, url, and ignore the length
@@ -50,6 +56,9 @@ def save_playlist_names_to_txt(playlists_info, folder="Playlist Data", filename=
 
 # Write playlist name and length to text file
 def save_playlist_lengths_to_txt(playlists_info, folder="Playlist Data", filename="PlaylistLengths.txt"):
+
+    print(f"Writing playlist lengths...")
+
     file_path = os.path.join(folder, filename)
     with open(file_path, "w") as file:  # open in write mode
         for name, _, playlist_length in playlists_info:  # Unpack name, ignore url, and get length
@@ -61,9 +70,40 @@ def save_playlist_lengths_to_txt(playlists_info, folder="Playlist Data", filenam
             file.write(f"{name}: {length} tracks\n\n")
             
     print(f"Playlist lengths have been saved to {filename}")
-    
+
+# Get the users top artists
+def get_users_top_artists(folder='User Data', filename='TopArtists.txt'):
+
+    print(f"Fetching your top artists...")
+
+    top_artists_data = sp.current_user_top_artists(limit=50)     # Fetch top artists. Change limit to fetch more. Maximum is 50
+    top_artists = [artist['name'] for artist in top_artists_data.get('items', [])]      # Extract artist names
+
+    # Write to file
+    file_path = os.path.join(folder, filename)
+    with open(file_path, "w") as file:  # open in write mode
+        for artist_name in top_artists:  # Unpack name, url, and ignore the length
+            file.write(f"{artist_name}\n")
+            
+    print(f"Top artists have been saved to {filename}")
+
+# Get the users top tracks
+def get_users_top_tracks(folder='User Data', filename='TopTracks.txt'):
+
+    print(f"Fetching your top tracks...")
+
+    top_tracks_data = sp.current_user_top_tracks(limit=50)     # Fetch top artists. Change limit to fetch more. Maximum is 50
+    top_tracks = [track['name'] for track in top_tracks_data.get('items', [])]      # Extract artist names
+
+    # Write to file
+    file_path = os.path.join(folder, filename)
+    with open(file_path, "w") as file:  # open in write mode
+        for track_name in top_tracks:  # Unpack name, url, and ignore the length
+            file.write(f"{track_name}\n")
+            
+    print(f"Top tracks have been saved to {filename}")
+
 if __name__ == "__main__":
-    print("Fetching your Spotify playlists...\n")
     
     playlists_info = get_playlist_info()
     
@@ -72,6 +112,12 @@ if __name__ == "__main__":
         save_playlist_names_to_txt(playlists_info)
         
         # Save playlist lengths
-        save_playlist_lengths_to_txt(playlists_info)
+        #save_playlist_lengths_to_txt(playlists_info)
+
+        # Save users top artists
+        get_users_top_artists()
+
+        # Save users top tracks
+        get_users_top_tracks()
     else:
         print("No playlists found. Make sure your account has playlists and try again.")
