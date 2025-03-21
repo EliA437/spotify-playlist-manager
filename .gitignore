@@ -2,3 +2,5 @@
 venv/
 .spotifycache
 webappversion.py
+__pycache__/
+*.pyc
