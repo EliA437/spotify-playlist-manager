@@ -1,0 +1,4 @@
+.env
+venv/
+.spotifycache
+webappversion.py
