@@ -1,5 +1,6 @@
 import os
 import spotipy
+import requests
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
 
@@ -7,7 +8,7 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 redirect_uri = 'http://localhost:5000/callback'
-scope = 'playlist-read-private, user-top-read'  # Access private playlists, and users top artists
+scope = 'playlist-read-private, playlist-modify-public, playlist-modify-private, user-top-read' # Change this to grant access to do different things
 
 # Authenticate with Spotify (this will open a browser for login)
 sp_oauth = SpotifyOAuth(
@@ -48,7 +49,7 @@ def save_playlist_names_to_txt(playlists_info, folder="Playlist Data", filename=
     print(f"Writing playlist names...")
 
     file_path = os.path.join(folder, filename)
-    with open(file_path, "w") as file:  # open in write mode
+    with open(file_path, "w", encoding="utf-8") as file:  # open in write mode
         for name, url, _ in playlists_info:  # Unpack name, url, and ignore the length
             file.write(f"{name}: {url}\n\n")
             
@@ -108,4 +109,40 @@ def get_users_top_tracks(folder='User Data', filename='TopTracks.txt'):
 
     print(f"Top tracks have been saved to {filename}")
 
+# Function to generate playlists
+def playlist_generator():
 
+    user_id = sp.current_user()['id']
+
+    playlist_data = {
+        "name": "New Playlist",
+        "description": "blank",
+        "public": False
+    }
+
+     # Endpoint to create a playlist
+    url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+
+    # Retrieve access token
+    access_token = sp.auth_manager.get_access_token()['access_token']
+
+
+    # Endpoint to create a playlist
+    headers = {
+    'Authorization': f'Bearer {access_token}'
+    }
+
+
+    # Make the POST request to create the playlist
+    response = requests.post(url, headers=headers, json=playlist_data)
+
+    if response.status_code == 201:
+        playlist = response.json()
+        print("Playlist created successfully!")
+        print(f"Playlist Name: {playlist['name']}")
+        print(f"Playlist ID: {playlist['id']}")
+        print(f"Playlist URL: {playlist['external_urls']['spotify']}")
+    else:
+        print(f"Failed to create playlist: {response.status_code} - {response.text}")
+    
+playlist_generator()

@@ -1,6 +1,6 @@
 from fetch_data import get_playlist_info, get_users_top_artists, get_users_top_tracks, save_playlist_names_to_txt
 from visualize_data import create_top_tracks_bargraph, read_top_tracks
-from analyze_data_wAI import ask_prompts
+from analyze_data_wAI import ask_prompts, create_image
 # eventually add main terminal logic here for interacting with the program
 
 if __name__ == "__main__":
@@ -31,4 +31,5 @@ if __name__ == "__main__":
 
 # ANALIZE DATA FILE
 
-    ask_prompts()
+    #ask_prompts()
+    create_image()

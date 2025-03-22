@@ -4,10 +4,10 @@
 4: After Dark - Popularity: 64
 5: Land Rover - Popularity: 21
 6: Promise U That - Popularity: 53
-7: ORCHESTRATÃ‹ - Popularity: 65
-8: Montagem Lunar Diamante - Slowed - Popularity: 76
-9: Entombed - Popularity: 72
-10: SO WHAT - Popularity: 55
+7: ORCHESTRATË - Popularity: 65
+8: SO WHAT - Popularity: 55
+9: Montagem Lunar Diamante - Slowed - Popularity: 76
+10: Entombed - Popularity: 73
 11: Frontin - Popularity: 60
 12: Timeless (feat Playboi Carti) - Popularity: 91
 13: LA DROGA - Popularity: 69
@@ -18,3 +18,13 @@
 18: Trance (with Travis Scott & Young Thug) - Popularity: 82
 19: Around Me (feat. Don Toliver) - Popularity: 77
 20: Losing My Mind - Popularity: 44
+21: MOONLIGHT REMIX - Popularity: 46
+22: Diles - Popularity: 79
+23: JJust A Teen - Popularity: 0
+24: One Take Freestyle - Popularity: 64
+25: Love Potions Slowed and Reverbed - Popularity: 73
+26: Virgo World (feat. Lil Tecca) - Popularity: 46
+27: Leave Me Alone - Popularity: 67
+28: Change Ya Life - Popularity: 57
+29: SPINNIN (Segway Remix) - Popularity: 75
+30: LOVE HURTS - Popularity: 48
