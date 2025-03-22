@@ -93,14 +93,19 @@ def get_users_top_tracks(folder='User Data', filename='TopTracks.txt'):
     print(f"Fetching your top tracks...")
 
     top_tracks_data = sp.current_user_top_tracks(limit=50)     # Fetch top artists. Change limit to fetch more. Maximum is 50
-    top_tracks = [track['name'] for track in top_tracks_data.get('items', [])]      # Extract artist names
 
-    # Write to file
+    # Extract track names and popularity scores
+    top_tracks = [(track['name'], track['popularity']) for track in top_tracks_data.get('items', [])]
+
     file_path = os.path.join(folder, filename)
-    with open(file_path, "w") as file:  # open in write mode
-        for track_name in top_tracks:  # Unpack name, url, and ignore the length
-            file.write(f"{track_name}\n")
-            
+
+    with open(file_path, "w") as file:  
+        i = 1
+        for track_name , track_popularity in top_tracks:  
+            file.write(f"{i}: {track_name} - Popularity: {track_popularity}\n")
+            i += 1
+     
+
     print(f"Top tracks have been saved to {filename}")
 
 
