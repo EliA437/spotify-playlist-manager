@@ -1,19 +1,27 @@
 # spotify-playlist-manager
 
+1) Create folder
 
-1) Install venv
+    Git clone repository
+    naviate to folder
+
+2) Install venv
 
     sudo apt install python3.12-venv
 
-2) setup virtual env: 
+3) Setup virtual env: 
 
     python3 -m venv venv
 
     source venv/bin/activate
 
-3) install dependencies:
+4) Install dependencies:
 
     pip install -r requirements.txt
+
+5) Run program
+
+    python3 main.py
 
 
 
