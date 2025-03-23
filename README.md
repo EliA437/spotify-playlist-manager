@@ -4,7 +4,7 @@
 
 ### 1) Clone the Repository
 ```sh
-git clone <repository-url>
+git clone https://github.com/EliA437/spotify-playlist-manager
 cd spotify-playlist-manager
 ```
 
