@@ -10,11 +10,11 @@ load_dotenv()
 openai.api_key = os.getenv('OPEN_AI_KEY')
 
 # Read top artists
-with open('User Data/TopArtists.txt') as file:
+with open('User Data/TopArtists.txt', encoding="utf-8", errors="replace") as file:
     top_artists_contents = file.read()
 
 # Read top tracks
-with open('User Data/TopTracks.txt') as file:
+with open('User Data/TopTracks.txt', encoding="utf-8", errors="replace") as file:
     top_tracks_contents = file.read()
 
 def open_ai_api_req(prompt):

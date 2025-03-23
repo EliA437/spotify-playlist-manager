@@ -25,7 +25,7 @@ if __name__ == "__main__":
 # VISUALIZE DATA FILE
 
     # Read top tracks data and save to lists
-    read_top_tracks()
+    #read_top_tracks()
 
     # Create bar graph from top tracks info
     #create_top_tracks_bargraph()
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 # ANALIZE DATA FILE
 
     #ask_prompts()
-    create_image()
+    #create_image()
 
 # Playlist Generator
     num_songs = 50
