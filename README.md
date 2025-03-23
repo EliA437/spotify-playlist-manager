@@ -1,5 +1,19 @@
 # Spotify Playlist Manager
 
+## Description
+
+This project allows you to create personalized playlists based on a promp. Some of its features include:
+
+- **Playlist Creation**: Based on a promp it can create you a playlist automatically and upload it to your Spotify account.
+- **Top 50 Songs**: Retrieve a list of the top 50 songs based on various criteria, such as user preferences or trending data.
+- **Top 50 Artists**: Access a list of the top 50 artists, showcasing the most popular musicians across genres.
+- **Spotify Popularity Comparison**: A graph is generated to compare the popularity of the top 50 songs using Spotify's popularity scores. This helps you visually understand how popular the songs are on the platform.
+
+The project uses **Matplotlib**, a scientific library, to create the graphs that display the comparisons between songs and their popularity scores.
+
+Overall, this project makes it easier to create playlists, discover new artists and tracks, and gain insights into the popularity of songs on Spotify.
+
+
 ## Setup Instructions
 
 ### 1) Clone the Repository
