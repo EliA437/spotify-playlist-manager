@@ -27,8 +27,6 @@ sp = spotipy.Spotify(auth_manager=sp_oauth)
 # Get playlist info
 def get_playlist_info():
 
-    print("Fetching your Spotify playlist data...\n")
-
     playlists = sp.current_user_playlists()
     playlists_info = []
     
@@ -51,10 +49,13 @@ def save_playlist_names_to_txt(playlists_info, folder="Playlist Data", filename=
 
     file_path = os.path.join(folder, filename)
     with open(file_path, "w", encoding="utf-8") as file:  # open in write mode
+        i = 1
         for name, url, _ in playlists_info:  # Unpack name, url, and ignore the length
             file.write(f"{name}: {url}\n\n")
-            
-    print(f"Playlist names and urls have been saved to {filename}")
+            print(f"{i}: {name}")
+            i += 1
+    print("\n")
+    print(f"Playlist names and urls have been saved to {filename} in Playlist Data Folder\n")
 
 # Write playlist name and length to text file
 def save_playlist_lengths_to_txt(playlists_info, folder="Playlist Data", filename="PlaylistLengths.txt"):
@@ -84,17 +85,20 @@ def get_users_top_artists(folder='User Data', filename='TopArtists.txt'):
     # Write to file
     file_path = os.path.join(folder, filename)
     with open(file_path, "w") as file:  # open in write mode
+        i = 1
         for artist_name in top_artists:  # Unpack name, url, and ignore the length
             file.write(f"{artist_name}\n")
-            
-    print(f"Top artists have been saved to {filename}")
+            print(f"{i}: {artist_name}")
+            i += 1
+    print("\n")      
+    print(f"Top artists have been saved to {filename}\n")
 
 # Get the users top tracks
 def get_users_top_tracks(folder='User Data', filename='TopTracks.txt'):
 
     print(f"Fetching your top tracks...")
 
-    top_tracks_data = sp.current_user_top_tracks(limit=30)     # Fetch top tracks. Change limit to fetch more. Maximum is 50
+    top_tracks_data = sp.current_user_top_tracks(limit=50)     # Fetch top tracks. Change limit to fetch more. Maximum is 50
 
     # Extract track names and popularity scores
     top_tracks = [(track['name'], track['popularity']) for track in top_tracks_data.get('items', [])]
@@ -105,10 +109,11 @@ def get_users_top_tracks(folder='User Data', filename='TopTracks.txt'):
         i = 1
         for track_name , track_popularity in top_tracks:  
             file.write(f"{i}: {track_name} - Popularity: {track_popularity}\n")
+            print(f"{i}: {track_name} - Popularity: {track_popularity}")
             i += 1
-     
-
-    print(f"Top tracks have been saved to {filename}")
+    print("\n")
+    print(f"Top tracks have been saved to {filename}\n")
+    
 
 
 

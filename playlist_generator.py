@@ -102,7 +102,7 @@ def create_playlist(init_prompt):
             sp.playlist_add_items(playlist_id, track_uris)
             print("Songs added to playlist!")
         else:
-            print("No valid songs found.")
+            print("No valid songs found. - this error occurs when their is an issue with the AI, just try running it a few more times and it will probalbly work")
 
     add_songs_to_playlist()
 

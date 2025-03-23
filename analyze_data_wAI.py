@@ -77,7 +77,7 @@ def ask_prompts():
 
         print('What your top artists say about you: \n\n')
         completion_0 = open_ai_api_req(prompt1)
-        print(completion_0.choices[0].message.content + '\n')
+        print(completion_0)
 
     # Recommend artists
     def prompt_2():
@@ -85,14 +85,14 @@ def ask_prompts():
         prompt2 = f'Can you recomend me {num_artists_recomended} more artists that I might like based on: {top_artists_contents} DO NOT INCLUDE DUPLICATE ARTISTS TO THE LIST'
         print('Giving recomendations... \n\n')
         completion_1 = open_ai_api_req(prompt2)
-        print(completion_1.choices[0].message.content + '\n')
+        print(completion_1)
 
     # Guess user info based on top artists
     def prompt_3():
         prompt3 = f'Can you guess my gender, age, and what region im from based on my top artist{top_artists_contents}'
         print('Guessing age, gender, and region... \n\n')
         completion_2 = open_ai_api_req(prompt3)
-        print(completion_2.choices[0].message.content + '\n')
+        print(completion_2)
 
     prompt_2() # Only call prompt 2 for now
    

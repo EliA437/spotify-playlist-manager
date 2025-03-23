@@ -22,6 +22,9 @@ def read_top_tracks():
                     popularity_scores.append(popularity_score)
 
 def create_top_tracks_bargraph(): 
+
+    read_top_tracks()
+    
     # Create the bar graph
     plt.figure(figsize=(10, 6))  # Adjust the size of the graph
     plt.bar(song_names, popularity_scores)
@@ -38,3 +41,4 @@ def create_top_tracks_bargraph():
 
     # Optionally save the graph as an image
     plt.savefig('Visualized Data/song_popularity_graph.png')
+    print('Top songs saved to bargraph in the path: Visualized Data/song_popularity_graph.png')
