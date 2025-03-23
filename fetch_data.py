@@ -3,6 +3,7 @@ import spotipy
 import requests
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
+from analyze_data_wAI import open_ai_api_req
 
 load_dotenv()
 client_id = os.getenv("CLIENT_ID")
@@ -109,40 +110,5 @@ def get_users_top_tracks(folder='User Data', filename='TopTracks.txt'):
 
     print(f"Top tracks have been saved to {filename}")
 
-# Function to generate playlists
-def playlist_generator():
-
-    user_id = sp.current_user()['id']
-
-    playlist_data = {
-        "name": "New Playlist",
-        "description": "blank",
-        "public": False
-    }
-
-     # Endpoint to create a playlist
-    url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
-
-    # Retrieve access token
-    access_token = sp.auth_manager.get_access_token()['access_token']
 
 
-    # Endpoint to create a playlist
-    headers = {
-    'Authorization': f'Bearer {access_token}'
-    }
-
-
-    # Make the POST request to create the playlist
-    response = requests.post(url, headers=headers, json=playlist_data)
-
-    if response.status_code == 201:
-        playlist = response.json()
-        print("Playlist created successfully!")
-        print(f"Playlist Name: {playlist['name']}")
-        print(f"Playlist ID: {playlist['id']}")
-        print(f"Playlist URL: {playlist['external_urls']['spotify']}")
-    else:
-        print(f"Failed to create playlist: {response.status_code} - {response.text}")
-    
-playlist_generator()

@@ -17,19 +17,24 @@ with open('User Data/TopArtists.txt') as file:
 with open('User Data/TopTracks.txt') as file:
     top_tracks_contents = file.read()
 
-def open_ai_api_req(promp):
-        response = openai.ChatCompletion.create(
+def open_ai_api_req(prompt):
+    # Make the API request to OpenAI's ChatCompletion
+    response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[{
             "role": "user",
-            "content": f"{promp}"        # Input to ChatGpt
+            "content": f"{prompt}"  # Input to ChatGPT
         }]
-        )
-        return response
+    )
+    
+    # Extract the actual text from the API response
+    text_content = response['choices'][0]['message']['content']
+    return text_content
+
 # this method exists to avaoid previous issues with rules against creating images with certain words and promp limits
 def create_image_prompt():
     image_creation_prompt = open_ai_api_req(f'make a description for an abstract art piece based off of the mood of the genres of these songs dont include anthing against the safety system{top_tracks_contents}')
-    return image_creation_prompt['choices'][0]['message']['content']  # Extract actual text
+    return image_creation_prompt#['choices'][0]['message']['content']  # Extract actual text
 
 # Create and save image
 def create_image():
@@ -92,8 +97,6 @@ def ask_prompts():
     prompt_2() # Only call prompt 2 for now
    
 
-# Delete this later 
-create_image()
-ask_prompts()
+
 
     
