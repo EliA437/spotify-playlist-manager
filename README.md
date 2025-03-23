@@ -1,33 +1,50 @@
-# spotify-playlist-manager
+# Spotify Playlist Manager
 
-1) Create folder
+## Setup Instructions
 
-    Git clone repository
-    naviate to folder
+### 1) Clone the Repository
+```sh
+git clone <repository-url>
+cd spotify-playlist-manager
+```
 
-2) Install venv
+### 2) Create a `.env` File
+Inside the project folder, create a `.env` file and add the following variables with your API keys:
+```sh
+# Spotify API
+CLIENT_ID = ''
+CLIENT_SECRET = ''
 
-    sudo apt install python3.12-venv - not necessary on  windows
+# OpenAI API
+OPEN_AI_KEY = ''
+```
 
+### 3) Install Virtual Environment (if necessary)
+- On **Linux/macOS**:
+  ```sh
+  sudo apt install python3.12-venv  # Not required on Windows
+  ```
 
-3) Setup virtual env: 
-
-    python3 -m venv venv
-
+### 4) Set Up Virtual Environment
+```sh
+python3 -m venv venv
+```
+- **Activate it:**
+  - On **Linux/macOS**:
+    ```sh
     source venv/bin/activate
-    windows: venv\Scripts\activate
+    ```
+  - On **Windows**:
+    ```sh
+    venv\Scripts\activate
+    ```
 
+### 5) Install Dependencies
+```sh
+pip install -r requirements.txt
+```
 
-4) Install dependencies:
-
-    pip install -r requirements.txt
-
-5) Create dotenv file and add api key for chat gpt and spotify api
-
-6) Run program
-
-    python main.py
-
-
-
-
+### 6) Run the Program
+```sh
+python main.py
+```

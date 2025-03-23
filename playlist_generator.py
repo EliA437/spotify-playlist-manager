@@ -28,13 +28,25 @@ sp = spotipy.Spotify(auth_manager=sp_oauth)
 
 def create_playlist(init_prompt):
 
+    playlist_name = 'New Playlist'
+
     converted_prompt = f"create a list of {init_prompt} with the format: ('Track Name', 'Artist') no numbers or anthing"
+
+    # Create playlist name with ai(work on later)
+    '''
+    name_prompt = f'{converted_prompt} make a good playlist name for this must be less than 100 characters dont include any special characters or the song names just the name of the playlist in plain english'
+   
+    playlist_name = open_ai_api_req(name_prompt) 
+
+    if len(playlist_name) > 100:
+        playlist_name = playlist_name[:100] # shorten to 100 characters if chat gpt doesent do that
+    '''
 
     user_id = sp.current_user()['id']
 
     # Create a new playlist
     playlist_data = {
-        "name": "AI Generated Playlist",
+        "name": playlist_name,
         "description": "Generated using AI recommendations",
         "public": False
     }
@@ -52,7 +64,7 @@ def create_playlist(init_prompt):
     if response.status_code == 201:
         playlist = response.json()
         playlist_id = playlist['id']
-        print(f"Playlist Created: {playlist['name']} ({playlist['external_urls']['spotify']})")
+        print(f"Playlist Created: {playlist['name']} ")
     else:
         print(f"Failed to create playlist: {response.status_code} - {response.text}")
         return
@@ -104,6 +116,7 @@ def create_playlist(init_prompt):
         else:
             print("No valid songs found. - this error occurs when their is an issue with the AI, just try running it a few more times and it will probalbly work")
 
+    print('Adding songs now...')
     add_songs_to_playlist()
 
 
