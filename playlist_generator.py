@@ -24,51 +24,33 @@ sp_oauth = SpotifyOAuth(
 
 sp = spotipy.Spotify(auth_manager=sp_oauth)
 
+def start_playlist_generator(init_prompt):
 
+    converted_prompt = f"create a list of {init_prompt} with the format: ('Track Name', 'Artist') no numbers"
 
-def create_playlist(init_prompt):
+    # // HELPER METHODS //
+    def create_name():
+        max_length = 30
 
-    playlist_name = 'New Playlist'
+        print("Creating playlist name...\n")
+        
+        # Create playlist name with chat gpt
+        name_prompt = f'{converted_prompt} playlist name must just be in the format: Playlist Name. Nothing else around it. No characters just the playlist name. No longer than 30 characters or 3 words'
+        playlist_name = open_ai_api_req(name_prompt) 
 
-    converted_prompt = f"create a list of {init_prompt} with the format: ('Track Name', 'Artist') no numbers or anthing"
+        # // filters to make sure playlist name is correct //
 
-    # Create playlist name with ai(work on later)
-    '''
-    name_prompt = f'{converted_prompt} make a good playlist name for this must be less than 100 characters dont include any special characters or the song names just the name of the playlist in plain english'
-   
-    playlist_name = open_ai_api_req(name_prompt) 
+        # Ensure max 3 word length
+        words = playlist_name.split()  # Split into words
+        playlist_name = ' '.join(words[:3])  # Keep only the first 3 words while adding a space inbetween
 
-    if len(playlist_name) > 100:
-        playlist_name = playlist_name[:100] # shorten to 100 characters if chat gpt doesent do that
-    '''
+        # Remove anything thas not an alphabetical character except the spaces
+        playlist_name = ''.join(c for c in playlist_name if c.isalpha() or c.isspace() or c.isalnum) 
 
-    user_id = sp.current_user()['id']
+        print(f" playlist_name: {playlist_name}\n")
 
-    # Create a new playlist
-    playlist_data = {
-        "name": playlist_name,
-        "description": "Generated using AI recommendations",
-        "public": False
-    }
-
-    url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
-    access_token = sp_oauth.get_access_token(as_dict=False)
-
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Content-Type': 'application/json'
-    }
-
-    response = requests.post(url, headers=headers, json=playlist_data)
-
-    if response.status_code == 201:
-        playlist = response.json()
-        playlist_id = playlist['id']
-        print(f"Playlist Created: {playlist['name']} ")
-    else:
-        print(f"Failed to create playlist: {response.status_code} - {response.text}")
-        return
-
+        return playlist_name
+    
     # Function to get track URI
     def get_track_uri(track_name, artist_name=""):
         query = f"track:{track_name} artist:{artist_name}"
@@ -78,6 +60,40 @@ def create_playlist(init_prompt):
             return result['tracks']['items'][0]['uri']
         return None
 
+    # // Main Methods //
+
+    def create_playlist():
+        playlist_name = create_name() # Use the create playlist name heleper method to create a new name for the playlist
+        user_id = sp.current_user()['id']
+
+        # Create a new playlist
+        playlist_data = {
+            "name": playlist_name,
+            "description": "Generated using AI recommendations",
+            "public": False
+        }
+
+        url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+        access_token = sp_oauth.get_access_token(as_dict=False)
+
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+
+        response = requests.post(url, headers=headers, json=playlist_data)
+
+        
+        if response.status_code == 201: # playlist create successful
+            playlist = response.json()
+            playlist_id = playlist['id']
+            print(f"Playlist Created: {playlist['name']} ")
+            add_songs_to_playlist(playlist_id) # if the playlist is successfully created we can now add songs and pass through playlist id
+        else:                                                                               # playlist creation not successful
+            print(f"Failed to create playlist: {response.status_code} - {response.text}")
+            return
+
+    
     # AI generates a list of songs
     def build_track_name_list():
         track_list = open_ai_api_req(converted_prompt)  # Simulating the OpenAI API response
@@ -108,16 +124,18 @@ def create_playlist(init_prompt):
         return track_uris
 
     # Add tracks to playlist
-    def add_songs_to_playlist():
+    def add_songs_to_playlist(playlist_id):
         track_uris = build_track_uri_list()
         if track_uris:
+            print('Adding songs now...')
             sp.playlist_add_items(playlist_id, track_uris)
             print("Songs added to playlist!")
         else:
             print("No valid songs found. - this error occurs when their is an issue with the AI, just try running it a few more times and it will probalbly work")
 
-    print('Adding songs now...')
-    add_songs_to_playlist()
+    
+    create_playlist()
+
 
 
 

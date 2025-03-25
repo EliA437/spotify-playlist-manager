@@ -1,7 +1,7 @@
 from fetch_data import get_playlist_info, get_users_top_artists, get_users_top_tracks, save_playlist_names_to_txt
 from visualize_data import create_top_tracks_bargraph, read_top_tracks
 from analyze_data_wAI import ask_prompts, create_image
-from playlist_generator import create_playlist
+from playlist_generator import start_playlist_generator
 
 # This script provides a terminal-based interface for managing Spotify playlists
 
@@ -49,8 +49,8 @@ if __name__ == "__main__":
                     continue  
                 else:
                     # Generate prompt for playlist creation
-                    prompt = f'create a playlist that is {playlist_info} with no more and no less than {num_songs} songs on it'
-                    create_playlist(prompt)
+                    prompt = f'create a playlist that is {playlist_info} with no more and no less than {num_songs} songs on it MUST BE {num_songs} long'
+                    start_playlist_generator(prompt)
                 break  
 
         # Option 2: Get top 50 songs
