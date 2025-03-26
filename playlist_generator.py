@@ -6,9 +6,8 @@ from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
 from analyze_data_wAI import open_ai_api_req
 import re
-from requests.exceptions import SSLError
 import time
-from PIL import Image
+from spotify_utilities import (create_name, image_to_base64, compress_image)
 
 load_dotenv()
 client_id = os.getenv("CLIENT_ID")
@@ -33,28 +32,6 @@ def start_playlist_generator(init_prompt, num_songs):
     converted_prompt = f"create a list of {init_prompt} with the format: ('Track Name', 'Artist') no numbers that must be {num_songs} long"
 
     # // HELPER METHODS //
-    def create_name():
-
-        max_words = 2
-
-        print("Creating playlist name...\n")
-        
-        # Create playlist name with chat gpt
-        name_prompt = f'{converted_prompt} playlist name must just be in the format: Playlist Name. Nothing else around it. No characters just the playlist name. No longer than 30 characters or 3 words'
-        playlist_name = open_ai_api_req(name_prompt) 
-
-        # // filters to make sure playlist name is correct //
-
-        # Ensure max 3 word length
-        words = playlist_name.split()  # Split into words
-        playlist_name = ' '.join(words[:max_words])  # Keep only the first 3 words while adding a space inbetween
-
-        # Remove anything thas not an alphabetical character except the spaces
-        playlist_name = ''.join(c for c in playlist_name if c.isalpha() or c.isspace() or c.isalnum) 
-
-        print(f" playlist_name: {playlist_name}\n")
-
-        return playlist_name
     
     # Function to get track URI
     def get_track_uri(track_name, artist_name=""):
@@ -72,38 +49,11 @@ def start_playlist_generator(init_prompt, num_songs):
             print("Not authorized or token has expired.")
             return None
         return token_info['access_token']
-
-    def image_to_base64(image_path):
-        try:
-            with open(image_path, "rb") as image_file:
-                encoded_string = base64.b64encode(image_file.read())  # This converts the image to base64
-                return encoded_string.decode('utf-8')  # Return the base64 string
-        except FileNotFoundError:
-            print(f"Error: Image file not found at {image_path}")
-            return None
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            return None
-        
-    def compress_image(image_path, output_path, max_width=1000, max_height=1000, quality=70):
-        try:
-            with Image.open(image_path) as img:
-                # Resize the image if it exceeds the max dimensions
-                img.thumbnail((max_width, max_height))
-
-                # Save the image with reduced quality
-                img.save(output_path, format='JPEG', quality=quality)  # JPEG is generally more compressed than PNG
-                print(f"Image saved as {output_path} with reduced size.")
-                return output_path  # Return the path to the compressed image
-
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            return None
-        
+            
     # // Main Methods //
 
     def create_playlist():
-        playlist_name = create_name() # Use the create playlist name heleper method to create a new name for the playlist
+        playlist_name = create_name(converted_prompt) # Use the create playlist name heleper method to create a new name for the playlist
         user_id = sp.current_user()['id']
 
         # Create a new playlist
