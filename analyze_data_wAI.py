@@ -33,7 +33,7 @@ def open_ai_api_req(prompt):
 
 # this method exists to avaoid previous issues with rules against creating images with certain words and promp limits
 def create_image_prompt():
-    image_creation_prompt = open_ai_api_req(f'make a description for an abstract art piece based off of the mood of the genres of these songs dont include anthing against the safety system{top_tracks_contents}')
+    image_creation_prompt = open_ai_api_req(f'make an abstract painting') # {top_tracks_contents}
     return image_creation_prompt#['choices'][0]['message']['content']  # Extract actual text
 
 # Create and save image
@@ -57,7 +57,7 @@ def create_image():
     response = requests.get(image_url)
 
     folder_name = 'Playlist Images'
-    image_name = "image_2.png"      # make this ai generated as well
+    image_name = "image_2.JPEG"      
     image_path = os.path.join(folder_name, image_name)
 
     # Open the image from the response and save it

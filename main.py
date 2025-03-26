@@ -11,6 +11,9 @@ if __name__ == "__main__":
     # save_playlist_lengths_to_txt(playlists_info)
     # create_image()
 
+
+    
+
     # Display menu options to the user
     print("\n")
     print("Welcome to the Spotify Playlist Manager\n")
@@ -50,7 +53,8 @@ if __name__ == "__main__":
                 else:
                     # Generate prompt for playlist creation
                     prompt = f'create a playlist that is {playlist_info} with no more and no less than {num_songs} songs on it MUST BE {num_songs} long'
-                    start_playlist_generator(prompt)
+                    create_image()
+                    start_playlist_generator(prompt, num_songs)
                 break  
 
         # Option 2: Get top 50 songs
