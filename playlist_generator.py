@@ -34,7 +34,8 @@ def start_playlist_generator(init_prompt, num_songs):
 
     # // HELPER METHODS //
     def create_name():
-        max_length = 30
+
+        max_words = 2
 
         print("Creating playlist name...\n")
         
@@ -46,7 +47,7 @@ def start_playlist_generator(init_prompt, num_songs):
 
         # Ensure max 3 word length
         words = playlist_name.split()  # Split into words
-        playlist_name = ' '.join(words[:3])  # Keep only the first 3 words while adding a space inbetween
+        playlist_name = ' '.join(words[:max_words])  # Keep only the first 3 words while adding a space inbetween
 
         # Remove anything thas not an alphabetical character except the spaces
         playlist_name = ''.join(c for c in playlist_name if c.isalpha() or c.isspace() or c.isalnum) 
