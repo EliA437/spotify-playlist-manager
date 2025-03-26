@@ -137,6 +137,7 @@ def start_playlist_generator(init_prompt, num_songs):
     
     # AI generates a list of songs
     def build_track_name_list():
+        print('Finding track list')
         track_list = open_ai_api_req(converted_prompt)  # Simulating the OpenAI API response
 
         # Step 1: Use a regular expression to extract song and artist pairs

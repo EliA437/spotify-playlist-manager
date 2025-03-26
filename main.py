@@ -44,7 +44,7 @@ if __name__ == "__main__":
             playlist_info = input('What type of playlist would you like to create? \n')
               
             while True:
-                num_songs = input('How many songs do you want on it? (Must be <= 50)\n')
+                num_songs = input('What is the max amount of songs you want on it? (Must be <= 50)\n')
                 int_num_songs = int(num_songs)
                 
                 if int_num_songs > 50 or int_num_songs <= 0:
