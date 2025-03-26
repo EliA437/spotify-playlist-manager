@@ -38,7 +38,7 @@ def create_image_prompt():
 
 # Create and save image
 def create_image():
-
+    print('Creating playlist image...')
     ai_edited_prompt = create_image_prompt()
     if len(ai_edited_prompt) >= 1000:
         ai_edited_prompt = ai_edited_prompt[:1000]
@@ -57,7 +57,7 @@ def create_image():
     response = requests.get(image_url)
 
     folder_name = 'Playlist Images'
-    image_name = "image_2.JPEG"      
+    image_name = "image_2.jpeg"      
     image_path = os.path.join(folder_name, image_name)
 
     # Open the image from the response and save it

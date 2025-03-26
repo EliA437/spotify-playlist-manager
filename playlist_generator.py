@@ -166,7 +166,7 @@ def start_playlist_generator(init_prompt, num_songs):
             print('Adding playlist image')
             for attempt in range(3):  # Retry 3 times
                 try:
-                    response = requests.put(url, headers=headers, data=image_base64)
+                    response = requests.put(url, headers=headers, data=image_base64) # API request
                     #print(image_base64)
                     if response.status_code == 202:
                         print("Playlist cover image updated successfully!")
