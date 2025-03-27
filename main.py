@@ -1,5 +1,5 @@
 from fetch_data import get_playlist_info, get_users_top_artists, get_users_top_tracks, save_playlist_names_to_txt
-from visualize_data import create_top_tracks_bargraph, read_top_tracks
+from visualize_data import create_top_tracks_bargraph
 from analyze_data_wAI import ask_prompts, create_image
 from playlist_generator import start_playlist_generator
 
@@ -25,28 +25,35 @@ def main():
     
     # create a playlist for coding
     # Display menu options to the user
-    print("\n")
-    print(bcolors.LIGHTGREEN + "Welcome to the Spotify Playlist Manager\n" + bcolors.ENDC)
-    print(bcolors.LIGHTGREEN + "**************************************" + bcolors.ENDC)
-    print(bcolors.DARKGREEN + "1: Create a playlist" + bcolors.ENDC)
-    print(bcolors.DARKGREEN + "2: Get a list of your top 50 songs" + bcolors.ENDC)
-    print(bcolors.DARKGREEN + "3: Get a list of your top 50 artists" + bcolors.ENDC)
-    print(bcolors.DARKGREEN + "4: Get a list of your playlists" + bcolors.ENDC)
-    print(bcolors.LIGHTGREEN + "**************************************" + bcolors.ENDC)
+    menu_text = f"""
+    {bcolors.LIGHTGREEN}Welcome to the Spotify Playlist Manager{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}**************************************{bcolors.ENDC}
+    {bcolors.DARKGREEN}1: Create a playlist{bcolors.ENDC}
+    {bcolors.DARKGREEN}2: Get a list of your top 50 songs{bcolors.ENDC}
+    {bcolors.DARKGREEN}3: Get a list of your top 50 artists{bcolors.ENDC}
+    {bcolors.DARKGREEN}4: Get a list of your playlists{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}**************************************{bcolors.ENDC}
+    """
+
+    print("\n" + menu_text)
+
 
     choice = ''
 
     while True:
         # Get user input and ensure it is valid
-        choice = input(bcolors.WARNING + "Enter a number 1 - 4 based on what you would like to do (or 'q' to quit): \n" + bcolors.ENDC)
+        choice = input(bcolors.WARNING + "Enter a number 1 - 4 based on what you would like to do (or 'q' to quit, and 'o' to display options): \n" + bcolors.ENDC)
 
-        if choice not in ('1', '2', '3', '4', 'q'):
+        if choice not in ('1', '2', '3', '4', 'q', 'o'):
             print("Please input a valid number.")
             continue  
 
-        if choice == "q":
+        if choice == 'q':
             print("Goodbye!")
             break  
+        if choice == 'o':
+            print("\n" + menu_text)
+
         
         # Option 1: Create a playlist
         if choice == "1":
