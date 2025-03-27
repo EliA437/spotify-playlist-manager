@@ -12,7 +12,7 @@ def create_name(converted_prompt):
 
     # // filters to make sure playlist name is correct //
     
-    # Ensure max 3 word length
+    # Ensure max 2 word length
     words = playlist_name.split()  # Split into words
     playlist_name = ' '.join(words[:max_words])  # Keep only the first 3 words while adding a space in between
 

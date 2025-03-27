@@ -11,25 +11,36 @@ if __name__ == "__main__":
     # save_playlist_lengths_to_txt(playlists_info)
     # create_image()
 
-
+    class bcolors:
+        HEADER = '\033[95m'
+        OKBLUE = '\033[94m'
+        OKCYAN = '\033[96m'
+        OKGREEN = '\033[92m'
+        LIGHTGREEN = '\033[38;5;10m'  # Bright green
+        MEDIUMGREEN = '\033[38;5;34m'  # Medium green
+        DARKGREEN = '\033[38;5;22m'  # Dark green
+        WARNING = '\033[93m'
+        FAIL = '\033[91m'
+        ENDC = '\033[0m'
+        BOLD = '\033[1m'
+        UNDERLINE = '\033[4m'
     
-
+    # create a playlist for coding
     # Display menu options to the user
     print("\n")
-    print("Welcome to the Spotify Playlist Manager\n")
-    print("**************************************")
-    print("1: Create a playlist")
-    print("2: Get a list of your top 50 songs")
-    print("3: Get a list of your top 50 artists")
-    print("4: Get a list of your playlists")
-    print("**************************************\n")
-    print("(press q to quit)")
+    print(bcolors.LIGHTGREEN + "Welcome to the Spotify Playlist Manager\n" + bcolors.ENDC)
+    print(bcolors.LIGHTGREEN + "**************************************" + bcolors.ENDC)
+    print(bcolors.DARKGREEN + "1: Create a playlist" + bcolors.ENDC)
+    print(bcolors.DARKGREEN + "2: Get a list of your top 50 songs" + bcolors.ENDC)
+    print(bcolors.DARKGREEN + "3: Get a list of your top 50 artists" + bcolors.ENDC)
+    print(bcolors.DARKGREEN + "4: Get a list of your playlists" + bcolors.ENDC)
+    print(bcolors.LIGHTGREEN + "**************************************" + bcolors.ENDC)
 
     choice = ''
 
     while True:
         # Get user input and ensure it is valid
-        choice = input("Enter a number 1 - 4 based on what you would like to do (or 'q' to quit): \n")
+        choice = input(bcolors.WARNING + "Enter a number 1 - 4 based on what you would like to do (or 'q' to quit): \n" + bcolors.ENDC)
 
         if choice not in ('1', '2', '3', '4', 'q'):
             print("Please input a valid number.")
