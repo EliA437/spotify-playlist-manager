@@ -5,12 +5,10 @@ from playlist_generator import start_playlist_generator
 
 # This script provides a terminal-based interface for managing Spotify playlists
 
-if __name__ == "__main__":
-
     # UNUSED METHODS (kept for potential future use) 
     # save_playlist_lengths_to_txt(playlists_info)
-    # create_image()
 
+def main():
     class bcolors:
         HEADER = '\033[95m'
         OKBLUE = '\033[94m'
@@ -109,3 +107,6 @@ if __name__ == "__main__":
             print("Fetching your playlists...")
             playlist_info = get_playlist_info()
             save_playlist_names_to_txt(playlist_info)
+
+if __name__ == "__main__":
+    main()
