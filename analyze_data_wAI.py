@@ -82,7 +82,9 @@ def ask_prompts():
     # Recommend artists
     def prompt_2():
         num_artists_recomended = 100
-        prompt2 = f'Can you recomend me {num_artists_recomended} more artists that I might like based on: {top_artists_contents} DO NOT INCLUDE DUPLICATE ARTISTS TO THE LIST'
+        #prompt2 = f'Can you recomend me {num_artists_recomended} more artists that I might like based on: {top_artists_contents} DO NOT INCLUDE DUPLICATE ARTISTS TO THE LIST'
+        prompt2 = f'Can you recomend me {num_artists_recomended} more artists that I might like'
+
         print('Giving recomendations... \n\n')
         completion_1 = open_ai_api_req(prompt2)
         print(completion_1)

@@ -96,7 +96,7 @@ def main():
 
             while True:
                 # Ask the user if they want AI-based recommendations
-                to_be_analyzed = input('Would you like more recommendations based on your top artists (y/n): \n')
+                to_be_analyzed = input('Would you like some recomendations for artists you might like (y/n): \n')
 
                 if to_be_analyzed not in ('y', 'n'):
                     print('Please enter a valid choice.')
