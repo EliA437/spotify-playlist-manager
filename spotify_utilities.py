@@ -47,3 +47,4 @@ def compress_image(image_path, output_path, max_width=1000, max_height=1000, qua
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
+    

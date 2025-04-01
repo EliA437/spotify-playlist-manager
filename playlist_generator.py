@@ -4,7 +4,7 @@ import spotipy
 import requests
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
-from analyze_data_wAI import open_ai_api_req
+from analyze_data_wAI import open_ai_api_req, create_image
 import re
 import time
 from spotify_utilities import (create_name, image_to_base64, compress_image)
@@ -147,6 +147,9 @@ def start_playlist_generator(init_prompt, num_songs):
         # Step 2: Print the result to verify
         for song, artist in matches:
             print(f"Song: {song}, Artist: {artist}")
+
+        create_image(track_list)      # Create the image based on the track list
+        
 
         return matches
 

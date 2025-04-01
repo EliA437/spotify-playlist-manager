@@ -32,14 +32,14 @@ def open_ai_api_req(prompt):
     return text_content
 
 # this method exists to avaoid previous issues with rules against creating images with certain words and promp limits
-def create_image_prompt():
-    image_creation_prompt = open_ai_api_req(f'make an abstract painting') # {top_tracks_contents}
+def create_image_prompt(songs_list):    # 3 Songs list is edited with this method to create an image prompt
+    image_creation_prompt = open_ai_api_req(f'make an abstract painting based on {songs_list} ignore any stuff here that might go against the image creation policy of openai') 
     return image_creation_prompt#['choices'][0]['message']['content']  # Extract actual text
 
 # Create and save image
-def create_image():
+def create_image(songs_list): # 1 Pass in songs list to create image
     print('Creating playlist image...')
-    ai_edited_prompt = create_image_prompt()
+    ai_edited_prompt = create_image_prompt(songs_list)  # 2 Send it to create edited prompt to change it
     if len(ai_edited_prompt) >= 1000:
         ai_edited_prompt = ai_edited_prompt[:1000]
 

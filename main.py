@@ -69,7 +69,6 @@ def main():
                 else:
                     # Generate prompt for playlist creation
                     prompt = f'create a playlist that is {playlist_info} with no more and no less than {num_songs} songs on it MUST BE {num_songs} long'
-                    create_image()
                     start_playlist_generator(prompt, num_songs)
                 break  
 
