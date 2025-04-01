@@ -27,16 +27,15 @@ def main():
     # Display menu options to the user
     menu_text = f"""
     {bcolors.LIGHTGREEN}Welcome to the Spotify Playlist Manager{bcolors.ENDC}
-    {bcolors.LIGHTGREEN}**************************************{bcolors.ENDC}
-    {bcolors.DARKGREEN}1: Create a playlist{bcolors.ENDC}
-    {bcolors.DARKGREEN}2: Get a list of your top 50 songs{bcolors.ENDC}
-    {bcolors.DARKGREEN}3: Get a list of your top 50 artists{bcolors.ENDC}
-    {bcolors.DARKGREEN}4: Get a list of your playlists{bcolors.ENDC}
-    {bcolors.LIGHTGREEN}**************************************{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}@************************************@{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}|1: Create a playlist                |{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}|2: Get a list of your top 50 songs  |{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}|3: Get a list of your top 50 artists|{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}|4: Get a list of your playlists     |{bcolors.ENDC}
+    {bcolors.LIGHTGREEN}@************************************@{bcolors.ENDC}
     """
 
     print("\n" + menu_text)
-
 
     choice = ''
 
@@ -49,7 +48,7 @@ def main():
             continue  
 
         if choice == 'q':
-            print("Goodbye!")
+            print(bcolors.WARNING + "Goodbye!" + bcolors.WARNING)
             break  
         if choice == 'o':
             print("\n" + menu_text)
@@ -64,7 +63,7 @@ def main():
                 int_num_songs = int(num_songs)
                 
                 if int_num_songs > 50 or int_num_songs <= 0:
-                    print('Please enter a valid number.')
+                    print('Please enter a valid character.')
                     continue  
                 else:
                     # Generate prompt for playlist creation
