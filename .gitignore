@@ -4,3 +4,5 @@ venv/
 webappversion.py
 __pycache__/
 *.pyc
+*.jpeg
+*.txt
